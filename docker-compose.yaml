@@ -44,7 +44,7 @@ services:
       API_PORT: 9000
       DB_ENGINE: sqlite
       TZ: UTC
-      BASE_URL: ${MEALIE_DOMAIN}
+      BASE_URL: https://${MEALIE_DOMAIN}
 #      DEFAULT_EMAIL: "changeme@example.com"
 #      DEFAULT_GROUP: "Home"
 #      DEFAULT_HOUSEHOLD: "Family"
