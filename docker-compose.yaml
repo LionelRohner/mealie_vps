@@ -1,0 +1,57 @@
+services:
+
+  # Reverse Proxy ----
+  swag:
+    image: ghcr.io/linuxserver/swag
+    container_name: swag
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=UTC
+      - URL=${MEALIE_DOMAIN}
+      # Cert challenge
+      - VALIDATION=http
+      - ONLY_SUBDOMAINS=false # If you wish to get certs only for certain subdomains
+      - STAGING=false # enable to receive certs in staging mode
+    volumes:
+      - /etc/config/swag:/config
+    ports:
+      - 443:443
+      - 80:80 # for cert renewal
+    networks:
+      - mealie_network
+    restart: unless-stopped
+
+  # Mealie ----
+  mealie:
+    image: ghcr.io/mealie-recipes/mealie:v3.4.0  
+    container_name: mealie
+    restart: always
+    networks:
+        - mealie_network
+    deploy:
+      resources:
+        limits:
+          memory: 1000M # limit memory
+    volumes:
+      - mealie-data:/app/data/
+    environment:
+      ALLOW_SIGNUP: "false"
+      PUID: 1000
+      PGID: 1000
+      API_PORT: 9000
+      DB_ENGINE: sqlite
+      TZ: UTC
+      BASE_URL: ${MEALIE_DOMAIN}
+#      DEFAULT_EMAIL: "changeme@example.com"
+#      DEFAULT_GROUP: "Home"
+#      DEFAULT_HOUSEHOLD: "Family"
+
+volumes:
+  mealie-data:
+
+networks:
+  mealie_network:
+    driver: bridge
