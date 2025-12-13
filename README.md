@@ -27,9 +27,12 @@ For secure hosting of your Mealie instance, configure SWAG (Secure Web Applicati
 
 ### Diagnostics
 
-* Check access logs `docker exec -it swag tail -f /config/log/nginx/access.log`
-  * Failed logins (401/403): `"POST /api/auth/token HTTP/2.0" 401 ...`
-  * Successful logins (200): `"POST /api/auth/token HTTP/2.0" 200 ...`
+* Monitor access logs with the following command:
+```shell
+docker exec -it swag tail -f /config/log/nginx/access.log
+```
+  * **Failed logins (401/403)**: Look for entries like `"POST /api/auth/token HTTP/2.0" 401 ...`
+  * **Successful logins (200)**: Look for entries like `"POST /api/auth/token HTTP/2.0" 200 ...`
 
 ## Fail2Ban Configuration
 
@@ -37,8 +40,14 @@ For secure hosting of your Mealie instance, configure SWAG (Secure Web Applicati
 
 ### Diagnostics
 
-* Check Fail2Ban logs `docker exec -it swag tail -f /config/log/fail2ban/fail2ban.log`
-* Check banned IPs `docker exec -it swag fail2ban-client status nginx-unauthorized`
+* Check Fail2Ban logs with the following command:
+```shell
+docker exec -it swag tail -f /config/log/fail2ban/fail2ban.log
+```
+* Check banned IPs with the following command:
+```{shell}
+docker exec -it swag fail2ban-client status nginx-unauthorized
+```
 
 # Docker Cleanup
 To clean up unused Docker images and containers, schedule a cron job:
