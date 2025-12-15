@@ -15,10 +15,29 @@ To keep your Mealie instance up-to-date, follow the official update instructions
 To automate backups of your Mealie instance, add the following line to your crontab:
 
 ```shell
-0 2 * * * /path/to/mealie_vps/backup_mealie.sh
+0 2 * * * /path/to/mealie_vps/backup_mealie.sh path/to/mealie_backup.log
 ```
 
-Or at any other time (see [Crontab Guru](https://crontab.guru/#0_3_*_*)).
+* **Note**  The log file is created automatically by the backup script. Ensure that the specified path exists and that the crontab user has adequate permissions to write to that directory.
+
+### Logrotate
+
+To manage the log files for your Mealie instance, create a new logrotate configuration file under `/etc/logrotate.d/mealie-backup`. Use the following configuration:
+
+**Note**: Adapt path and user!
+```shell
+path/to/mealie_backup.log {
+    weekly
+    missingok
+    rotate 4
+    compress
+    delaycompress
+    notifempty
+    create 0640 <user> <user>
+}
+```
+
+* To adapt scheduling time see [Crontab Guru](https://crontab.guru/#0_3_*_*).
 
 ## SWAG Configuration
 For secure hosting of your Mealie instance, configure SWAG (Secure Web Application Gateway):
