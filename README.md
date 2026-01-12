@@ -11,6 +11,8 @@ To keep your Mealie instance up-to-date, follow the official update instructions
 
 * [Mealie Update Documentation](https://docs.mealie.io/documentation/getting-started/updating/#docker)
 
+> **Check Release Notes:** [Mealie Release Notes](https://github.com/mealie-recipes/mealie/releases)
+
 ## Backups
 To automate backups of your Mealie instance, add the following line to your crontab:
 
