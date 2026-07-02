@@ -14,7 +14,7 @@ services:
       ALLOW_SIGNUP: "false"
       PUID: 1000
       PGID: 1000
-      API_PORT: 9000
+      API_PORT: 9925
       DB_ENGINE: sqlite
       TZ: UTC
       BASE_URL: https://${MEALIE_DOMAIN}
