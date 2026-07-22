@@ -6,6 +6,8 @@
 ## Overview
 Mealie is a neat, self-hosted recipe manager that helps you organize recipes and share them with friends and family.
 
+Run this setup with Swag (or similar) as reverse proxy.
+
 ## Updates
 To keep your Mealie instance up-to-date, follow the official update instructions:
 
